@@ -1,0 +1,52 @@
+{
+    "version": "20250719a",
+    "description": "Windows screen annotation tool with efficient annotation and rich features, Make screen demonstrations simpler, teaching more efficient, suitable for touch devices and computers.",
+    "homepage": "https://www.inkeys.top/",
+    "license": "GPL-3.0-or-later",
+    "architecture": {
+        "32bit": {
+            "url": "https://github.com/Alan-CRL/Inkeys/releases/download/20250719a/Inkeys20250719a-x86.zip",
+            "hash": "b181f878a7ead910a60fa0259791a99c2a34d93cdc1333a17677d59096651e60",
+            "extract_dir": "Inkeys"
+        },
+        "64bit": {
+            "url": "https://github.com/Alan-CRL/Inkeys/releases/download/20250719a/Inkeys20250719a-x64.zip",
+            "hash": "be5495ffb28c1afba719e82710b7ff453727626c3e2839512d595984714becb7",
+            "extract_dir": "Inkeys64"
+        },
+        "arm64": {
+            "url": "https://github.com/Alan-CRL/Inkeys/releases/download/20250719a/Inkeys20250719a-Arm64.zip",
+            "hash": "9f05ebaaa38ce3061a5c738b5b603bc43b0dd0731462012c7d41220f743d5ecd",
+            "extract_dir": "InkeysArm64"
+        }
+    },
+    "extract_dir": "Inkeys",
+    "shortcuts": [
+        [
+            "Inkeys.exe",
+            "Inkeys"
+        ]
+    ],
+    "persist": [
+        "opt",
+        "PlugIn",
+        "ScreenShot"
+    ],
+    "checkver": {
+        "github": "https://github.com/Alan-CRL/Inkeys",
+        "regex": "/Alan-CRL/Inkeys/releases/tag/([\\d\\w]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "32bit": {
+                "url": "https://github.com/Alan-CRL/Inkeys/releases/download/$version/Inkeys$version-x86.zip"
+            },
+            "64bit": {
+                "url": "https://github.com/Alan-CRL/Inkeys/releases/download/$version/Inkeys$version-x64.zip"
+            },
+            "arm64": {
+                "url": "https://github.com/Alan-CRL/Inkeys/releases/download/$version/Inkeys$version-Arm64.zip"
+            }
+        }
+    }
+}

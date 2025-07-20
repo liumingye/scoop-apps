@@ -1,0 +1,52 @@
+{
+    "version": "0.5.1",
+    "description": "A desktop application for OpenList",
+    "homepage": "https://oplist.org/",
+    "license": "GPL-3.0-or-later",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/OpenListTeam/OpenList-Desktop/releases/download/v0.5.1/OpenList.Desktop_0.5.1_x64-setup.exe#/dl.7z",
+            "hash": "0515112c950d1c479772f5b63dac6c068da7e42eb95b707f5096e5b19905e7b8"
+        },
+        "arm64": {
+            "url": "https://github.com/OpenListTeam/OpenList-Desktop/releases/download/v0.5.1/OpenList.Desktop_0.5.1_x64-setup.exe#/dl.7z",
+            "hash": "0515112c950d1c479772f5b63dac6c068da7e42eb95b707f5096e5b19905e7b8"
+        }
+    },
+    "shortcuts": [
+        [
+            "openlist-desktop.exe",
+            "OpenList Desktop"
+        ]
+    ],
+    "pre_install": [
+        "if (!(Test-Path \"$dir\\settings.json\") -or !(Get-Item \"$dir\\settings.json\").Length) {",
+        "    New-Item \"$dir\\settings.json\" -ItemType File -Force -ErrorAction SilentlyContinue | Out-Null",
+        "    Set-Content -Path \"$dir\\settings.json\" -Value '{\"app\":{\"auto_update_enabled\":false}}'",
+        "}"
+    ],
+    "post_install": "Remove-Item \"$dir\\`$*\", \"$dir\\Uninstall*\" -Force -Recurse",
+    "pre_uninstall": [
+        "while (Get-Service -Name 'openlist_desktop_service' -ErrorAction SilentlyContinue) {",
+        "    Invoke-ExternalCommand \"$dir\\uninstall-openlist-service.exe\" -RunAs -Quiet",
+        "}"
+    ],
+    "persist": [
+        "settings.json",
+        "logs",
+        "data"
+    ],
+    "checkver": {
+        "github": "https://github.com/OpenListTeam/OpenList-Desktop"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/OpenListTeam/OpenList-Desktop/releases/download/v$version/OpenList.Desktop_$version_x64-setup.exe#/dl.7z"
+            },
+            "arm64": {
+                "url": "https://github.com/OpenListTeam/OpenList-Desktop/releases/download/v$version/OpenList.Desktop_$version_x64-setup.exe#/dl.7z"
+            }
+        }
+    }
+}

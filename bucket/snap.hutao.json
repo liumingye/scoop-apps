@@ -1,0 +1,40 @@
+{
+    "version": "1.15.7",
+    "description": "一个实用的多功能原神工具箱",
+    "homepage": "https://hut.ao/",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/DGP-Studio/Snap.Hutao/releases/download/1.15.7/Snap.Hutao.1.15.7.msix#/dl.zip",
+            "hash": "fb7890cc918b817b54af4c9990db1d070454ebd206708d233aa3eaf059c50292"
+        }
+    },
+    "pre_install": [
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Enable-DevelopmentMode",
+        "New-PersistDirectory \"$([Environment]::GetFolderPath('Personal'))\\Hutao\" \"$persist_dir\\Personal\" -Migrate"
+    ],
+    "installer": {
+        "script": "Add-AppxPackage -Path \"$dir\\AppxManifest.xml\" -Register"
+    },
+    "pre_uninstall": [
+        "if ($cmd -eq 'uninstall') {",
+        "    Get-AppxPackage -Name \"60568DGPStudio.SnapHutao_wbnnev551gwxy\" | Remove-AppxPackage",
+        "} else {",
+        "    Get-AppxPackage -Name \"60568DGPStudio.SnapHutao_wbnnev551gwxy\" | Remove-AppxPackage -PreserveApplicationData",
+        "}",
+        "$bucket = $install.bucket",
+        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
+        "Stop-App",
+        "Remove-Junction \"$([Environment]::GetFolderPath('Personal'))\\Hutao\""
+    ],
+    "checkver": {
+        "github": "https://github.com/DGP-Studio/Snap.Hutao"
+    },
+    "autoupdate": {
+        "url": "https://github.com/DGP-Studio/Snap.Hutao/releases/download/$version/Snap.Hutao.$version.msix#/dl.zip",
+        "hash": {
+            "url": "https://github.com/DGP-Studio/Snap.Hutao/releases/download/$version/SHA256SUMS"
+        }
+    }
+}
