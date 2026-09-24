@@ -1,52 +1,37 @@
 {
-    "version": "5.5.6.38337834-5f969292",
-    "description": "WorkBuddy Desktop - AI Agent Desktop Application",
-    "homepage": "https://www.codebuddy.cn/work/",
-    "license": "Proprietary",
+    "version": "5.6.2.39458645",
+    "description": "A full-scenario AI workbench from Tencent.",
+    "homepage": "https://www.workbuddy.ai",
+    "license": {
+        "identifier": "Proprietary",
+        "url": "https://www.workbuddy.ai/document/term"
+    },
     "architecture": {
         "64bit": {
-            "url": "https://download.codebuddy.cn/workbuddy/saas/win32-x64-user/WorkBuddy-win32-x64-user-5.5.6.38337834-5f969292.exe",
-            "hash": "b1c61b8a0550012c3e9e2cce4b2d566fb5bdb3283e97146b8808c3dcb1a571f4"
+            "url": "https://codebuddy-1328495429.cos.accelerate.myqcloud.com/workbuddy/saas/win32-x64-user/WorkBuddy-win32-x64-user-5.6.2.39458645-35219ed6.exe#/dl.7z",
+            "hash": "0f160cef68c273caf3d459a6ea70e68650d64cda670a5508b2ae19ba0540571d"
         }
     },
-    "extract_dir": "{code_GetDestDir}",
-    "innosetup": true,
     "installer": {
         "script": [
-            ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-            "New-PersistDirectory \"$env:USERPROFILE\\.workbuddy\" \"$persist_dir\\.workbuddy\" -Migrate",
-            "New-PersistDirectory \"$env:AppData\\WorkBuddy\" \"$persist_dir\\AppData\" -Migrate"
+            "Get-Item \"$dir\\`$PLUGINSDIR\\app*.7z\" | Select-Object -First 1 | Expand-7zipArchive -DestinationPath $dir",
+            "Remove-Item \"$dir\\`$*\", \"$dir\\Uninst*\" -Force -Recurse -ErrorAction Ignore"
         ]
     },
-    "post_install": "Remove-Item \"$dir\\uninstall*\", \"$dir\\`$*\" -Force -Recurse -ErrorAction SilentlyContinue",
-    "bin": [
-        [
-            "bin/workbuddy.cmd",
-            "workbuddy"
-        ]
-    ],
     "shortcuts": [
         [
-            "WorkBuddy.exe",
-            "WorkBuddy"
+            "WorkBuddyAI.exe",
+            "WorkBuddyAI"
         ]
     ],
-    "pre_uninstall": [
-        "$bucket = $install.bucket",
-        ". \"$bucketsdir\\$bucket\\bin\\utils.ps1\"",
-        "Stop-App",
-        "Remove-Junction \"$env:USERPROFILE\\.workbuddy\"",
-        "Remove-Junction \"$env:AppData\\WorkBuddy\""
-    ],
     "checkver": {
-        "url": "https://www.codebuddy.cn/v2/update?platform=workbuddy-win32-x64-user",
-        "jsonpath": "$.url",
-        "regex": "(?<url>.*WorkBuddy-win32-x64-user-(?<version>[\\d.]+-[\\w.]+)\\.exe)"
+        "url": "https://www.workbuddy.ai/v2/update?platform=workbuddy-win32-x64-user",
+        "regex": "WorkBuddy-win32-x64-user-(?<version>\\d+(?:\\.\\d+)+)-(?<sha>[0-9a-f]+).exe"
     },
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://download.codebuddy.cn/workbuddy/saas/win32-x64-user/WorkBuddy-win32-x64-user-$version.exe"
+                "url": "https://codebuddy-1328495429.cos.accelerate.myqcloud.com/workbuddy/saas/win32-x64-user/WorkBuddy-win32-x64-user-$version-$matchSha.exe#/dl.7z"
             }
         }
     }
