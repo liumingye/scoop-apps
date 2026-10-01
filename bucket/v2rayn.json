@@ -1,18 +1,28 @@
 {
-    "version": "7.25.3",
-    "description": "A GUI client for Windows, Linux and macOS, support Xray and sing-box and others",
+    "version": "7.25.4",
+    "description": "v2rayN (WPF-based version) is a GUI client for V2Ray, with support for Xray, sing-box, and other compatible cores.",
     "homepage": "https://github.com/2dust/v2rayN",
-    "license": "GPL-3.0-or-later",
-    "notes": "* This is the beta and Avalonia UI version.",
+    "license": "GPL-3.0-only",
+    "notes": [
+        "Since v7.17.0, v2rayN is self-contained and no longer requires the .NET 8.0 Desktop Runtime.",
+        "For more information, see: https://github.com/2dust/v2rayN/releases/tag/7.17.0",
+        "",
+        "Different variants of v2rayN are available:",
+        "- versions/v2rayn-desktop       : Avalonia-UI-based version"
+    ],
+    "suggest": {
+        "v2fly-core": "v2ray",
+        "v2rayN-desktop": "versions/v2rayn-desktop"
+    },
     "architecture": {
         "64bit": {
-            "url": "https://github.com/2dust/v2rayN/releases/download/7.25.3/v2rayN-windows-64-desktop.zip",
-            "hash": "09bccd4758b8391f0bf9d1e4ab51a967ac86b1a1db40920ac6af035523946ad3",
+            "url": "https://github.com/2dust/v2rayN/releases/download/7.25.4/v2rayN-windows-64.zip",
+            "hash": "e699ddc7f02d060dee2b0005d3879d82db1c36961b866d1ed0f9f93f16390a6b",
             "extract_dir": "v2rayN-windows-64"
         },
         "arm64": {
-            "url": "https://github.com/2dust/v2rayN/releases/download/7.25.3/v2rayN-windows-arm64-desktop.zip",
-            "hash": "b62b5b6076c546edd6ee9df67c1db69743de74a55b8cc795792a98653ac6d064",
+            "url": "https://github.com/2dust/v2rayN/releases/download/7.25.4/v2rayN-windows-arm64.zip",
+            "hash": "2253deddcd88dd93641ee6b2ca5de6ff8b9062867b656b29dbd13d214bc2cdad",
             "extract_dir": "v2rayN-windows-arm64"
         }
     },
@@ -22,21 +32,15 @@
             "v2rayN"
         ]
     ],
-    "persist": [
-        "guiConfigs",
-        "binConfigs"
-    ],
-    "checkver": {
-        "url": "https://api.github.com/repos/2dust/v2rayN/releases?per_page=1",
-        "jsonpath": "$[0].tag_name"
-    },
+    "persist": "guiConfigs",
+    "checkver": "github",
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/2dust/v2rayN/releases/download/$version/v2rayN-windows-64-desktop.zip"
+                "url": "https://github.com/2dust/v2rayN/releases/download/$version/v2rayN-windows-64.zip"
             },
             "arm64": {
-                "url": "https://github.com/2dust/v2rayN/releases/download/$version/v2rayN-windows-arm64-desktop.zip"
+                "url": "https://github.com/2dust/v2rayN/releases/download/$version/v2rayN-windows-arm64.zip"
             }
         }
     }
